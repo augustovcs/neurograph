@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E59124BC-8280-44E9-8CE6-E64D2BC9E0FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroGraph.Domain", "src\NeuroGraph.Domain\NeuroGraph.Domain.csproj", "{3DD0926B-39D4-4AA9-BAB9-263DD92A597B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroGraph.Application", "src\NeuroGraph.Application\NeuroGraph.Application.csproj", "{C5576A07-18D4-4484-98FB-1728B2AC380F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroGraph.Infrastructure", "src\NeuroGraph.Infrastructure\NeuroGraph.Infrastructure.csproj", "{74EECD1A-FFCA-4183-818E-E2D9EE3FDFDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroGraph.Api", "src\NeuroGraph.Api\NeuroGraph.Api.csproj", "{1644DD1E-047E-4328-A3E7-76A2F02D1289}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4AC838F8-321F-423D-805A-9F6F876CB943}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroGraph.Tests", "tests\NeuroGraph.Tests\NeuroGraph.Tests.csproj", "{EB61146A-AC31-4241-BD81-8316ECFDB3ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3DD0926B-39D4-4AA9-BAB9-263DD92A597B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DD0926B-39D4-4AA9-BAB9-263DD92A597B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DD0926B-39D4-4AA9-BAB9-263DD92A597B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DD0926B-39D4-4AA9-BAB9-263DD92A597B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5576A07-18D4-4484-98FB-1728B2AC380F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5576A07-18D4-4484-98FB-1728B2AC380F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5576A07-18D4-4484-98FB-1728B2AC380F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5576A07-18D4-4484-98FB-1728B2AC380F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74EECD1A-FFCA-4183-818E-E2D9EE3FDFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74EECD1A-FFCA-4183-818E-E2D9EE3FDFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74EECD1A-FFCA-4183-818E-E2D9EE3FDFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74EECD1A-FFCA-4183-818E-E2D9EE3FDFDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1644DD1E-047E-4328-A3E7-76A2F02D1289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1644DD1E-047E-4328-A3E7-76A2F02D1289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1644DD1E-047E-4328-A3E7-76A2F02D1289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1644DD1E-047E-4328-A3E7-76A2F02D1289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB61146A-AC31-4241-BD81-8316ECFDB3ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB61146A-AC31-4241-BD81-8316ECFDB3ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB61146A-AC31-4241-BD81-8316ECFDB3ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB61146A-AC31-4241-BD81-8316ECFDB3ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3DD0926B-39D4-4AA9-BAB9-263DD92A597B} = {E59124BC-8280-44E9-8CE6-E64D2BC9E0FA}
+		{C5576A07-18D4-4484-98FB-1728B2AC380F} = {E59124BC-8280-44E9-8CE6-E64D2BC9E0FA}
+		{74EECD1A-FFCA-4183-818E-E2D9EE3FDFDF} = {E59124BC-8280-44E9-8CE6-E64D2BC9E0FA}
+		{1644DD1E-047E-4328-A3E7-76A2F02D1289} = {E59124BC-8280-44E9-8CE6-E64D2BC9E0FA}
+		{EB61146A-AC31-4241-BD81-8316ECFDB3ED} = {4AC838F8-321F-423D-805A-9F6F876CB943}
+	EndGlobalSection
+EndGlobal

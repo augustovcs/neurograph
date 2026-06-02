@@ -1,0 +1,109 @@
+FASES BASE DO PROJETO - NeuroGraph
+
+Fase 1 — MVP
+
+Objetivo:
+Fazer neurônios dispararem na tela.
+
+Stack:
+
+Front
+React
+TypeScript
+React Flow
+Tailwind
+Shadcn
+
+Backend
+ASP.NET Core
+Entity Framework Core
+PostgreSQL
+
+----
+Fase 2 — Tempo Real
+
+Agora começa a ficar interessante.
+
+Adiciona:
+SignalR
+
+Fluxo:
+Neuron fired
+↓
+SignalR
+↓
+React
+↓
+Atualiza tela
+
+Você passa a aprender:
+WebSockets
+Hub
+Broadcast
+Eventos
+
+Arquitetura:
+React
+   ↓
+SignalR
+   ↑
+ASP.NET
+   ↓
+Postgres
+
+----
+
+Fase 3 — Simulação Real
+
+Agora você cria:
+Engine de Simulação
+
+A Engine contém:
+Neuron
+Synapse
+Network
+Simulation
+
+
+----
+
+Fase 4 — Nível Sênior
+
+Só aqui entram:
+
+Redis
+Para estado das simulações.
+
+RabbitMQ
+Para múltiplas simulações.
+
+BackgroundService
+Para rodar simulações independentes.
+
+
+----
+
+
+Arquitetura principal separada em 4 cada
+
+Main -> projeto principal, onde irá rodar a leitura principal dos neurônios, a conexão principal entre eles e desenvolvimento de comportamentos randômicos-base que servirão de gatilho pra eventos dos serviços de comportamentos + avançados.
+A ideia aqui principal é uma tela gerar/ter neurônios que respondem a comportamentos de forma aleatória com base em estatísticas biológicas.
+
+Será desenvolvido o banco de dados com a seguinte ordem de tabelas:
+neurons, neurons_logs, neural connections, biological_signals, biological_events e 3 views com status de quais mais duraram/evoluíram, quantos morreram e de que formas e etc... e por fim uma view de eventos mais bem realizados(morte ou evolução)
+
+A ideia é trazer algo primitivo sem muitos detalhes e sem trabalhar com concorrência ainda
+
+Terá 3/4 Telas principais
+1-Main: sera a tela principal onde mostrara cards onde cada card se referenciará à uma outra tela como por exemplo Statistics, Hub(onde verá os neurônios) e Editor (onde verá como está a configuração de ocorrência de eventos e poderá fixar, já que todas serão randomizadas uma % a cada x tempo)
+
+Principio dessa arquitetura Main é poder construir as 3 telas e visualizar os neurônios animados, erros de dados, estatísticas e eventos serão ajustados no final.
+
+
+----
+
+Espaço para outras 3 da arquitetura
+
+
+
+

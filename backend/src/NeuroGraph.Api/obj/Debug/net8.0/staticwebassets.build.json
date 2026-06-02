@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "7vukjRldzUlRHfW01esnP0q37Xozqd7qgBVIGGiO4tQ=",
+  "Source": "NeuroGraph.Api",
+  "BasePath": "_content/NeuroGraph.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

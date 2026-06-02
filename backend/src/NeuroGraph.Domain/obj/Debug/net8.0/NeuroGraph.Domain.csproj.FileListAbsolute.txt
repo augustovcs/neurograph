@@ -1,0 +1,11 @@
+C:\Users\augus\Documents\CODE\NeuroGraph\backend\src\NeuroGraph.Domain\bin\Debug\net8.0\NeuroGraph.Domain.deps.json
+C:\Users\augus\Documents\CODE\NeuroGraph\backend\src\NeuroGraph.Domain\bin\Debug\net8.0\NeuroGraph.Domain.dll
+C:\Users\augus\Documents\CODE\NeuroGraph\backend\src\NeuroGraph.Domain\bin\Debug\net8.0\NeuroGraph.Domain.pdb
+C:\Users\augus\Documents\CODE\NeuroGraph\backend\src\NeuroGraph.Domain\obj\Debug\net8.0\NeuroGraph.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\augus\Documents\CODE\NeuroGraph\backend\src\NeuroGraph.Domain\obj\Debug\net8.0\NeuroGraph.Domain.AssemblyInfoInputs.cache
+C:\Users\augus\Documents\CODE\NeuroGraph\backend\src\NeuroGraph.Domain\obj\Debug\net8.0\NeuroGraph.Domain.AssemblyInfo.cs
+C:\Users\augus\Documents\CODE\NeuroGraph\backend\src\NeuroGraph.Domain\obj\Debug\net8.0\NeuroGraph.Domain.csproj.CoreCompileInputs.cache
+C:\Users\augus\Documents\CODE\NeuroGraph\backend\src\NeuroGraph.Domain\obj\Debug\net8.0\NeuroGraph.Domain.dll
+C:\Users\augus\Documents\CODE\NeuroGraph\backend\src\NeuroGraph.Domain\obj\Debug\net8.0\refint\NeuroGraph.Domain.dll
+C:\Users\augus\Documents\CODE\NeuroGraph\backend\src\NeuroGraph.Domain\obj\Debug\net8.0\NeuroGraph.Domain.pdb
+C:\Users\augus\Documents\CODE\NeuroGraph\backend\src\NeuroGraph.Domain\obj\Debug\net8.0\ref\NeuroGraph.Domain.dll
