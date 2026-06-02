@@ -1,0 +1,159 @@
+###############################################################################
+# NeuroGraph — .gitignore global (raiz do monorepo: Core + Web)
+###############################################################################
+
+###############################################################################
+# .NET / C# (Core/)
+###############################################################################
+# Build outputs
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+build/
+bld/
+[Ll]og/
+[Ll]ogs/
+artifacts/
+publish/
+PublishProfiles/
+*.binlog
+
+# Restore / NuGet
+project.lock.json
+project.fragment.lock.json
+*.nuget.props
+*.nuget.targets
+packages/
+!packages/build/
+*.nupkg
+*.snupkg
+.nuget/
+
+# MSBuild / build metadata
+*.tlog
+*.lastbuildstate
+*.unsuccessfulbuild
+*.cache
+*.VisualState.xml
+TestResult.xml
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+coverage*.json
+coverage*.xml
+coverage*.info
+*.coverage
+*.coveragexml
+.coverage
+
+# EF Core (manter migrations versionadas; ignorar dumps locais)
+*.mdf
+*.ldf
+*.ndf
+
+###############################################################################
+# Node / pnpm / Vite (Web/)
+###############################################################################
+node_modules/
+.pnpm-store/
+.pnpm-debug.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.yarn/
+.npm/
+
+# Build outputs do front
+dist/
+dist-ssr/
+.vite/
+.cache/
+.parcel-cache/
+.turbo/
+*.tsbuildinfo
+
+# Coverage / testes JS
+coverage/
+.nyc_output/
+
+###############################################################################
+# Variáveis de ambiente / segredos
+###############################################################################
+.env
+.env.*
+!.env.example
+*.local
+secrets.json
+appsettings.*.local.json
+*.pfx
+*.key
+*.pem
+
+###############################################################################
+# IDEs e editores
+###############################################################################
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+*.DotSettings.user
+
+# VS Code (mantém configs compartilhadas, ignora estado local)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+###############################################################################
+# Sistema operacional
+###############################################################################
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.stackdump
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+###############################################################################
+# Diversos
+###############################################################################
+*.log
+*.tmp
+*.temp
+*.bak
+*.orig
+*.swp
+*.swo

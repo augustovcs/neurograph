@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\NeuroGraph.Api.props" />
-</Project>
