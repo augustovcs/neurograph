@@ -1,68 +1,46 @@
 import { useMemo } from "react";
-import {
-  Background,
-  BackgroundVariant,
-  Controls,
-  MiniMap,
-  ReactFlow,
-  type NodeTypes,
-} from "@xyflow/react";
-import "@xyflow/react/dist/style.css";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Badge } from "@/components/ui/Badge";
-import { NeuronNode, type NeuronNodeData } from "@/features/hub/NeuronNode";
-import { buildGraph } from "@/features/hub/graph";
+import { NeuralScene } from "@/features/hub/scene/NeuralScene";
 import { buildNeurons, GROUPS, STATUS_META } from "@/mocks/data";
 import type { NeuronStatus } from "@/lib/types";
 
-const nodeTypes: NodeTypes = { neuron: NeuronNode };
+const NEURON_COUNT = 26;
 
 export function HubPage() {
-  const { nodes, edges } = useMemo(() => buildGraph(), []);
-
-  const { groupCounts, statusCounts, total } = useMemo(() => {
-    const neurons = buildNeurons(26);
+  const { groupCounts, statusCounts, total, connections } = useMemo(() => {
+    const neurons = buildNeurons(NEURON_COUNT);
     const groupCounts: Record<string, number> = {};
     const statusCounts: Record<NeuronStatus, number> = { idle: 0, firing: 0, evolved: 0, dead: 0 };
     for (const n of neurons) {
       groupCounts[n.group] = (groupCounts[n.group] ?? 0) + 1;
       statusCounts[n.status] += 1;
     }
-    return { groupCounts, statusCounts, total: neurons.length };
+    // mesmo nº de arestas geradas em neuralData.ts (8 + 10 + 7 + 3 cruzadas)
+    return { groupCounts, statusCounts, total: neurons.length, connections: 28 };
   }, []);
 
   return (
     <AppLayout title="Hub — Mundo Neural" badge="HUB">
       <div className="flex h-[calc(100vh-9.5rem)] gap-6">
-        {/* Canvas */}
-        <div className="panel relative min-w-0 flex-1 overflow-hidden">
-          <ReactFlow
-            nodes={nodes}
-            edges={edges}
-            nodeTypes={nodeTypes}
-            colorMode="dark"
-            fitView
-            fitViewOptions={{ padding: 0.2 }}
-            minZoom={0.3}
-            maxZoom={2}
-            proOptions={{ hideAttribution: true }}
-          >
-            <Background variant={BackgroundVariant.Dots} gap={28} size={1} color="#20233f" />
-            <Controls className="!border-[var(--color-border)] !bg-[var(--color-panel-2)]" showInteractive={false} />
-            <MiniMap
-              pannable
-              zoomable
-              maskColor="rgba(5,6,15,0.7)"
-              className="!bg-[var(--color-bg-soft)]"
-              nodeColor={(n) => (n.data as NeuronNodeData).color}
-            />
-          </ReactFlow>
+        {/* Canvas 3D (Three.js / WebGL) */}
+        <div
+          className="panel relative min-w-0 flex-1 overflow-hidden"
+          style={{
+            background:
+              "radial-gradient(120% 120% at 30% 20%, #23252d 0%, #181a20 45%, #101116 100%)",
+          }}
+        >
+          <NeuralScene count={NEURON_COUNT} />
 
-          <div className="pointer-events-none absolute left-4 top-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)]/70 px-3 py-2 backdrop-blur">
+          <div className="pointer-events-none absolute left-4 top-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)]/55 px-3 py-2 backdrop-blur">
             <p className="font-mono text-xs text-muted">
               <span className="text-[var(--color-primary-bright)]">{total}</span> neurônios ·{" "}
-              <span className="text-[var(--color-cyan)]">{edges.length}</span> conexões
+              <span className="text-[var(--color-cyan)]">{connections}</span> conexões
             </p>
+          </div>
+          <div className="pointer-events-none absolute bottom-4 right-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)]/55 px-3 py-1.5 backdrop-blur">
+            <p className="font-mono text-[11px] text-faint">arraste p/ orbitar · scroll p/ zoom</p>
           </div>
         </div>
 
@@ -100,8 +78,10 @@ export function HubPage() {
           <div className="panel p-5 text-sm">
             <h2 className="text-sm font-semibold">Dica</h2>
             <p className="mt-2 text-xs leading-relaxed text-muted">
-              Arraste os neurônios, use o scroll para zoom e o minimapa para navegar. Os que pulsam
-              estão <span className="text-[var(--color-amber)]">disparando</span>.
+              Renderizado em 3D com WebGL. Arraste para orbitar a rede e use o scroll para
+              aproximar. Os que pulsam mais forte estão{" "}
+              <span className="text-[var(--color-amber)]">disparando</span>; os apagados estão{" "}
+              <span className="text-[var(--color-red)]">mortos</span>.
             </p>
           </div>
         </aside>
