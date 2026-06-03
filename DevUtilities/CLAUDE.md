@@ -106,6 +106,10 @@ Essa separação existe para acomodar as Fases 2–4 (SignalR, Engine, Redis, Ra
 - Frontend usa pnpm (não npm/yarn). Path alias `@/` → `src/`.
 - Manter Fase 1 sem concorrência. Disparos hoje podem ser polling/random; tempo real fica para Fase 2.
 
+## Atribuição em commits (IMPORTANTE)
+
+- Ao commitar e dar push em nome do usuário, **NÃO** adicionar nenhuma atribuição de autoria/coautoria ao assistente (Claude). Especificamente: **não** incluir o trailer `Co-Authored-By: Claude ...` nem qualquer outra marca de "Generated with Claude Code" nas mensagens de commit. O objetivo é que o assistente não apareça como contribuidor no GitHub. Os commits devem sair apenas em nome do usuário.
+
 ## Comandos
 
 ```bash
