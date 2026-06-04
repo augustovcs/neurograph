@@ -11,10 +11,10 @@ public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
 {
     public AppDbContext CreateDbContext(string[] args)
     {
-        // Usa o diretório do projeto, não do processo — garante achar os appsettings
-        // independente de onde o dotnet ef for chamado.
-        var basePath = Path.GetFullPath(
-            Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
+        // Sobe do bin/Debug|Release/net8.0 até a raiz do projeto procurando o .csproj.
+        var basePath = AppContext.BaseDirectory;
+        while (!Directory.GetFiles(basePath, "*.csproj").Any())
+            basePath = Directory.GetParent(basePath)!.FullName;
 
         var config = new ConfigurationBuilder()
             .SetBasePath(basePath)
@@ -25,9 +25,6 @@ public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
         var connectionString = config.GetConnectionString("DefaultConnection")
             ?? throw new InvalidOperationException(
                 $"Connection string 'DefaultConnection' não encontrada. BasePath: {basePath}");
-
-        Console.WriteLine($"[Factory] BasePath: {basePath}");
-        Console.WriteLine($"[Factory] ConnStr: {connectionString[..Math.Min(60, connectionString.Length)]}...");
 
         var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
         optionsBuilder
