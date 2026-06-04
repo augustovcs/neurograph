@@ -10,5 +10,8 @@ export default defineConfig({
     alias: {
       '@': path.resolve(import.meta.dirname, './src'),
     },
+    // Garante uma única instância destas libs (evita "useContext of null"
+    // quando @react-three/postprocessing pega outra cópia do React/fiber).
+    dedupe: ['react', 'react-dom', '@react-three/fiber', 'three'],
   },
 })
