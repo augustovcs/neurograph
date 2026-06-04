@@ -92,6 +92,7 @@ coverage/
 *.local
 secrets.json
 appsettings.*.local.json
+appsettings.Development.json
 *.pfx
 *.key
 *.pem
