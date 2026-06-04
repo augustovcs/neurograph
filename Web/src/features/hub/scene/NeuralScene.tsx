@@ -1,6 +1,6 @@
-import { type ReactNode, useMemo, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { MeshDistortMaterial, OrbitControls, Sparkles } from "@react-three/drei";
+import { type ReactNode, useEffect, useMemo, useRef } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { MeshDistortMaterial, Sparkles } from "@react-three/drei";
 import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
 import * as THREE from "three";
 import {
@@ -175,11 +175,10 @@ function Axons({ nodes, edges }: { nodes: NeuronNode3D[]; edges: NeuralEdge3D[] 
 /** A rede inteira deriva lentamente no espaço (flutuação livre, sem orbitar um ponto fixo). */
 function DriftGroup({ children }: { children: ReactNode }) {
   const ref = useRef<THREE.Group>(null);
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (!ref.current) return;
-    ref.current.rotation.y += delta * 0.045;
-    ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.07) * 0.12;
-    ref.current.position.y = Math.sin(state.clock.elapsedTime * 0.25) * 0.3;
+    // deriva bem sutil — dá vida sem atrapalhar a navegação por voo livre
+    ref.current.rotation.y += delta * 0.015;
   });
   return <group ref={ref}>{children}</group>;
 }
@@ -215,6 +214,83 @@ function World({ count }: { count: number }) {
   );
 }
 
+/**
+ * Voo livre com mira DIRETA (sem suavização). WASD move pelo espaço, R/F sobe e
+ * desce, Shift acelera. Segurar o botão esquerdo e mover o mouse gira a câmera
+ * 1:1 com o deslocamento do cursor — resposta seca, sem inércia.
+ */
+function FreeFlyControls({ speed = 9, sensitivity = 0.0024 }: { speed?: number; sensitivity?: number }) {
+  const camera = useThree((s) => s.camera);
+  const gl = useThree((s) => s.gl);
+  const keys = useRef<Set<string>>(new Set());
+  const dragging = useRef(false);
+  const last = useRef({ x: 0, y: 0 });
+  const euler = useRef(new THREE.Euler(0, 0, 0, "YXZ"));
+
+  useEffect(() => {
+    const el = gl.domElement;
+    euler.current.setFromQuaternion(camera.quaternion);
+
+    const onKeyDown = (e: KeyboardEvent) => keys.current.add(e.code);
+    const onKeyUp = (e: KeyboardEvent) => keys.current.delete(e.code);
+    const onDown = (e: PointerEvent) => {
+      if (e.button !== 0) return;
+      dragging.current = true;
+      last.current = { x: e.clientX, y: e.clientY };
+      el.setPointerCapture(e.pointerId);
+      el.style.cursor = "grabbing";
+    };
+    const onMove = (e: PointerEvent) => {
+      if (!dragging.current) return;
+      const dx = e.clientX - last.current.x;
+      const dy = e.clientY - last.current.y;
+      last.current = { x: e.clientX, y: e.clientY };
+      // aplicação direta do delta do mouse — sem easing/inércia
+      euler.current.y -= dx * sensitivity;
+      euler.current.x -= dy * sensitivity;
+      const lim = Math.PI / 2 - 0.01;
+      euler.current.x = Math.max(-lim, Math.min(lim, euler.current.x));
+      camera.quaternion.setFromEuler(euler.current);
+    };
+    const onUp = (e: PointerEvent) => {
+      dragging.current = false;
+      el.style.cursor = "";
+      try {
+        el.releasePointerCapture(e.pointerId);
+      } catch {
+        /* ponteiro já liberado */
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keyup", onKeyUp);
+    el.addEventListener("pointerdown", onDown);
+    el.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("keyup", onKeyUp);
+      el.removeEventListener("pointerdown", onDown);
+      el.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+    };
+  }, [camera, gl, sensitivity]);
+
+  useFrame((_, delta) => {
+    const k = keys.current;
+    const boost = k.has("ShiftLeft") || k.has("ShiftRight") ? 2.6 : 1;
+    const d = Math.min(delta, 0.05) * speed * boost; // clamp evita "salto" após travar
+    if (k.has("KeyW")) camera.translateZ(-d);
+    if (k.has("KeyS")) camera.translateZ(d);
+    if (k.has("KeyA")) camera.translateX(-d);
+    if (k.has("KeyD")) camera.translateX(d);
+    if (k.has("KeyR") || k.has("Space")) camera.translateY(d);
+    if (k.has("KeyF")) camera.translateY(-d);
+  });
+
+  return null;
+}
+
 export function NeuralScene({ count = 26 }: { count?: number }) {
   return (
     <Canvas
@@ -223,14 +299,7 @@ export function NeuralScene({ count = 26 }: { count?: number }) {
       gl={{ alpha: true, antialias: true }}
     >
       <World count={count} />
-      {/* câmera livre: orbita, faz pan e zoom — nada preso a um neurônio central */}
-      <OrbitControls
-        enablePan
-        minDistance={6}
-        maxDistance={46}
-        enableDamping
-        dampingFactor={0.08}
-      />
+      <FreeFlyControls speed={9} sensitivity={0.0024} />
     </Canvas>
   );
 }

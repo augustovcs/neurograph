@@ -40,7 +40,9 @@ export function HubPage() {
             </p>
           </div>
           <div className="pointer-events-none absolute bottom-4 right-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)]/55 px-3 py-1.5 backdrop-blur">
-            <p className="font-mono text-[11px] text-faint">arraste p/ orbitar · scroll p/ zoom</p>
+            <p className="font-mono text-[11px] text-faint">
+              WASD p/ mover · botão esq. p/ olhar · R/F sobe/desce
+            </p>
           </div>
         </div>
 
@@ -78,10 +80,12 @@ export function HubPage() {
           <div className="panel p-5 text-sm">
             <h2 className="text-sm font-semibold">Dica</h2>
             <p className="mt-2 text-xs leading-relaxed text-muted">
-              Renderizado em 3D com WebGL. Arraste para orbitar a rede e use o scroll para
-              aproximar. Os que pulsam mais forte estão{" "}
-              <span className="text-[var(--color-amber)]">disparando</span>; os apagados estão{" "}
-              <span className="text-[var(--color-red)]">mortos</span>.
+              Renderizado em 3D com WebGL, em modo de <span className="text-foreground">voo livre</span>:
+              use <span className="font-mono text-foreground">WASD</span> para se mover pelo espaço e
+              segure o <span className="text-foreground">botão esquerdo</span> para olhar ao redor
+              (<span className="font-mono text-foreground">R/F</span> sobe/desce). Os que pulsam mais
+              forte estão <span className="text-[var(--color-amber)]">disparando</span>; os apagados
+              estão <span className="text-[var(--color-red)]">mortos</span>.
             </p>
           </div>
         </aside>
