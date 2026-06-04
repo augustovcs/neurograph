@@ -14,6 +14,11 @@ public class AppDbContext : DbContext
     public DbSet<NeuralConnection> NeuralConnections => Set<NeuralConnection>();
     public DbSet<NeuronLog> NeuronLogs => Set<NeuronLog>();
 
+    /// Views
+    public DbSet<NeuronLongevityView> NeuronLongevity => Set<NeuronLongevityView>();
+    public DbSet<NeuronDeathStatsView> NeuronDeathStats => Set<NeuronDeathStatsView>();
+    public DbSet<BestEventView> BestEvents => Set<BestEventView>();
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<NeuralConnection>()
@@ -25,5 +30,11 @@ public class AppDbContext : DbContext
             .HasOne<Neuron>().WithMany()
             .HasForeignKey(c => c.TargetNeuronId)
             .OnDelete(DeleteBehavior.Restrict);
+
+
+        //ENTITY VIEWS
+        modelBuilder.Entity<NeuronLongevityView>().HasNoKey().ToView("vw_neuron_longevity");
+        modelBuilder.Entity<NeuronDeathStatsView>().HasNoKey().ToView("vw_neuron_death_stats");
+        modelBuilder.Entity<BestEventView>().HasNoKey().ToView("vw_best_events");
     }
 }
