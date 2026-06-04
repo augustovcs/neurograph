@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NeuroGraph.Main.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Core.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260604212107_CreateViews")]
+    partial class CreateViews
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,11 +62,7 @@ namespace Core.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-<<<<<<< HEAD
-                    b.Property<DateTime>("FiredAt")
-=======
                     b.Property<DateTimeOffset>("FiredAt")
->>>>>>> develop
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("fired_at");
 
@@ -91,11 +90,7 @@ namespace Core.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-<<<<<<< HEAD
-                    b.Property<DateTime>("CreatedAt")
-=======
                     b.Property<DateTimeOffset>("CreatedAt")
->>>>>>> develop
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
@@ -111,13 +106,8 @@ namespace Core.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("target_neuron_id");
 
-<<<<<<< HEAD
-                    b.Property<double>("Weight")
-                        .HasColumnType("double precision")
-=======
                     b.Property<float>("Weight")
                         .HasColumnType("real")
->>>>>>> develop
                         .HasColumnName("weight");
 
                     b.HasKey("Id")
@@ -212,11 +202,7 @@ namespace Core.Migrations
                     b.ToTable("neuron_logs", (string)null);
                 });
 
-<<<<<<< HEAD
-            modelBuilder.Entity("Api.Entities.Views.BestEventView", b =>
-=======
             modelBuilder.Entity("BestEventView", b =>
->>>>>>> develop
                 {
                     b.Property<string>("Cause")
                         .HasColumnType("text")
@@ -244,11 +230,7 @@ namespace Core.Migrations
                     b.ToView("vw_best_events", (string)null);
                 });
 
-<<<<<<< HEAD
-            modelBuilder.Entity("Api.Entities.Views.NeuronDeathStatsView", b =>
-=======
             modelBuilder.Entity("NeuronDeathStatsView", b =>
->>>>>>> develop
                 {
                     b.Property<string>("Cause")
                         .IsRequired()
@@ -264,11 +246,7 @@ namespace Core.Migrations
                     b.ToView("vw_neuron_death_stats", (string)null);
                 });
 
-<<<<<<< HEAD
-            modelBuilder.Entity("Api.Entities.Views.NeuronLongevityView", b =>
-=======
             modelBuilder.Entity("NeuronLongevityView", b =>
->>>>>>> develop
                 {
                     b.Property<int>("EvolutionCount")
                         .HasColumnType("integer")
@@ -294,21 +272,12 @@ namespace Core.Migrations
 
             modelBuilder.Entity("Api.Entities.BiologicalSignal", b =>
                 {
-<<<<<<< HEAD
-                    b.HasOne("Api.Entities.Neuron", "Neuron")
-=======
                     b.HasOne("Api.Entities.Neuron", null)
->>>>>>> develop
                         .WithMany("Signals")
                         .HasForeignKey("NeuronId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_biological_signals_neurons_neuron_id");
-<<<<<<< HEAD
-
-                    b.Navigation("Neuron");
-=======
->>>>>>> develop
                 });
 
             modelBuilder.Entity("Api.Entities.NeuralConnection", b =>
