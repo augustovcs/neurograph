@@ -10,7 +10,7 @@ namespace Api.Entities
         public DateTime FiredAt { get; set; } = DateTime.UtcNow;
 =======
         //public Neuron Neuron { get; set; } = null!;
-        public float Intensity { get; set; }
+        public double Intensity { get; set; }
         public DateTimeOffset FiredAt { get; set; } = DateTimeOffset.UtcNow;
 >>>>>>> develop
     }

@@ -29,6 +29,8 @@ public class AppDbContext : DbContext
 >>>>>>> develop
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<NeuronLog>().ToTable("neurons_logs");
+
         modelBuilder.Entity<NeuralConnection>()
             .HasOne<Neuron>().WithMany()
             .HasForeignKey(c => c.SourceNeuronId)
