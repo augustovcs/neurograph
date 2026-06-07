@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Api.Entities;
+using Api.Entities.Views;
 
 namespace NeuroGraph.Main.Data;
 
@@ -21,6 +22,8 @@ public class AppDbContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<NeuronLog>().ToTable("neurons_logs");
+
         modelBuilder.Entity<NeuralConnection>()
             .HasOne<Neuron>().WithMany()
             .HasForeignKey(c => c.SourceNeuronId)
@@ -31,10 +34,16 @@ public class AppDbContext : DbContext
             .HasForeignKey(c => c.TargetNeuronId)
             .OnDelete(DeleteBehavior.Restrict);
 
-
-        //ENTITY VIEWS
-        modelBuilder.Entity<NeuronLongevityView>().HasNoKey().ToView("vw_neuron_longevity");
-        modelBuilder.Entity<NeuronDeathStatsView>().HasNoKey().ToView("vw_neuron_death_stats");
-        modelBuilder.Entity<BestEventView>().HasNoKey().ToView("vw_best_events");
+        modelBuilder.Entity<NeuronLongevityView>()
+            .HasNoKey()
+            .ToView("vw_neuron_longevity");
+    
+        modelBuilder.Entity<NeuronDeathStatsView>()
+            .HasNoKey()
+            .ToView("vw_neuron_death_stats");
+    
+        modelBuilder.Entity<BestEventView>()
+            .HasNoKey()
+            .ToView("vw_best_events");
     }
 }

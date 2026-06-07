@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using NeuroGraph.Main.Data;
 using EFCore.NamingConventions;
+using Neurograph.Services;
 
 // Garante ambiente Development quando rodado pelo dotnet ef (que não lê launchSettings).
 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") is null)
@@ -20,6 +21,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
     .UseSnakeCaseNamingConvention());
     
+    
+builder.Services.AddSingleton(new BehaviorSettings());
+builder.Services.AddScoped<INeuronBehaviorService, NeuronBehaviorService>();
 
 var app = builder.Build();
 
