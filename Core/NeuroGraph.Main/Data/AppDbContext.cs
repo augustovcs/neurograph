@@ -8,7 +8,6 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    // Os DbSet<> (tabelas) entram aqui na PRÓXIMA issue.
     public DbSet<Neuron> Neurons => Set<Neuron>();
     public DbSet<BiologicalEvent> BiologicalEvents => Set<BiologicalEvent>();
     public DbSet<BiologicalSignal> BiologicalSignals => Set<BiologicalSignal>();
@@ -19,6 +18,11 @@ public class AppDbContext : DbContext
     public DbSet<NeuronLongevityView> NeuronLongevity => Set<NeuronLongevityView>();
     public DbSet<NeuronDeathStatsView> NeuronDeathStats => Set<NeuronDeathStatsView>();
     public DbSet<BestEventView> BestEvents => Set<BestEventView>();
+
+    ///
+    /// 
+    /// 
+    ///
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
