@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Core.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260604205821_CreateViewsModule1")]
-    partial class CreateViewsModule1
+    [Migration("20260604212107_CreateViews")]
+    partial class CreateViews
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,7 +62,7 @@ namespace Core.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<DateTime>("FiredAt")
+                    b.Property<DateTimeOffset>("FiredAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("fired_at");
 
@@ -90,7 +90,7 @@ namespace Core.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
@@ -106,8 +106,8 @@ namespace Core.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("target_neuron_id");
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("double precision")
+                    b.Property<float>("Weight")
+                        .HasColumnType("real")
                         .HasColumnName("weight");
 
                     b.HasKey("Id")
@@ -202,7 +202,7 @@ namespace Core.Migrations
                     b.ToTable("neuron_logs", (string)null);
                 });
 
-            modelBuilder.Entity("Api.Entities.Views.BestEventView", b =>
+            modelBuilder.Entity("BestEventView", b =>
                 {
                     b.Property<string>("Cause")
                         .HasColumnType("text")
@@ -230,7 +230,7 @@ namespace Core.Migrations
                     b.ToView("vw_best_events", (string)null);
                 });
 
-            modelBuilder.Entity("Api.Entities.Views.NeuronDeathStatsView", b =>
+            modelBuilder.Entity("NeuronDeathStatsView", b =>
                 {
                     b.Property<string>("Cause")
                         .IsRequired()
@@ -246,7 +246,7 @@ namespace Core.Migrations
                     b.ToView("vw_neuron_death_stats", (string)null);
                 });
 
-            modelBuilder.Entity("Api.Entities.Views.NeuronLongevityView", b =>
+            modelBuilder.Entity("NeuronLongevityView", b =>
                 {
                     b.Property<int>("EvolutionCount")
                         .HasColumnType("integer")
@@ -272,14 +272,12 @@ namespace Core.Migrations
 
             modelBuilder.Entity("Api.Entities.BiologicalSignal", b =>
                 {
-                    b.HasOne("Api.Entities.Neuron", "Neuron")
+                    b.HasOne("Api.Entities.Neuron", null)
                         .WithMany("Signals")
                         .HasForeignKey("NeuronId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_biological_signals_neurons_neuron_id");
-
-                    b.Navigation("Neuron");
                 });
 
             modelBuilder.Entity("Api.Entities.NeuralConnection", b =>
