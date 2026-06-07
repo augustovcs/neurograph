@@ -15,18 +15,11 @@ public class AppDbContext : DbContext
     public DbSet<NeuralConnection> NeuralConnections => Set<NeuralConnection>();
     public DbSet<NeuronLog> NeuronLogs => Set<NeuronLog>();
 
-<<<<<<< HEAD
-    public DbSet<NeuronLongevityView> NeuronLongevity => Set<NeuronLongevityView>();
-    public DbSet<NeuronDeathStatsView> NeuronDeathStats => Set<NeuronDeathStatsView>();
-    public DbSet<BestEventView> BestEvents => Set<BestEventView>();
-
-=======
     /// Views
     public DbSet<NeuronLongevityView> NeuronLongevity => Set<NeuronLongevityView>();
     public DbSet<NeuronDeathStatsView> NeuronDeathStats => Set<NeuronDeathStatsView>();
     public DbSet<BestEventView> BestEvents => Set<BestEventView>();
     
->>>>>>> develop
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<NeuronLog>().ToTable("neurons_logs");
@@ -41,7 +34,6 @@ public class AppDbContext : DbContext
             .HasForeignKey(c => c.TargetNeuronId)
             .OnDelete(DeleteBehavior.Restrict);
 
-<<<<<<< HEAD
         modelBuilder.Entity<NeuronLongevityView>()
             .HasNoKey()
             .ToView("vw_neuron_longevity");
@@ -53,12 +45,5 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<BestEventView>()
             .HasNoKey()
             .ToView("vw_best_events");
-=======
-
-        //ENTITY VIEWS
-        modelBuilder.Entity<NeuronLongevityView>().HasNoKey().ToView("vw_neuron_longevity");
-        modelBuilder.Entity<NeuronDeathStatsView>().HasNoKey().ToView("vw_neuron_death_stats");
-        modelBuilder.Entity<BestEventView>().HasNoKey().ToView("vw_best_events");
->>>>>>> develop
     }
 }
