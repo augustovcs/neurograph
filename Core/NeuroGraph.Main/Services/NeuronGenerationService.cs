@@ -24,11 +24,6 @@ public class NeuronGenerationService : INeuronGenerationService
         var neurons = new List<Neuron>();
         var connections = new List<NeuralConnection>();
 
-   
-
-
-      
-
         for (int i = 0; i < countNeurons; i++)
         {
             neurons.Add(new Neuron
@@ -82,7 +77,6 @@ public class NeuronGenerationService : INeuronGenerationService
 
         return true; 
 
-        throw new NotImplementedException();
 
     }
 
