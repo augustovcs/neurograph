@@ -13,11 +13,16 @@ public class SimulationController : ControllerBase
    
     private readonly INeuronBehaviorService _behaviorService;
     private readonly INeuronGenerationService _generationService;
+    private readonly INeuronResetService _resetService;
 
-    public SimulationController(INeuronBehaviorService behaviorService, INeuronGenerationService generationService) 
+    public SimulationController(
+                    INeuronBehaviorService behaviorService,
+                    INeuronGenerationService generationService, 
+                    INeuronResetService resetService) 
     {
         _behaviorService = behaviorService;
         _generationService = generationService;
+        _resetService = resetService;
     }
 
     [HttpPost("tick")]
@@ -34,9 +39,13 @@ public class SimulationController : ControllerBase
         await _generationService.LowNeuronSpawn(countNeurons);
         return Ok(new {message = $"Generated {countNeurons} Neurons with Success! "});
        
+    }
 
-
-
+    [HttpDelete("delete-all-neurons")]
+    public async Task<IActionResult> DeleteAllNeurons()
+    {
+        await _resetService.ResetNeurons();
+        return Ok(new { message = "Deleted all neurons!"}); 
     }
 
 
