@@ -25,10 +25,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     
 builder.Services.AddSingleton(new BehaviorSettings());
 builder.Services.AddScoped<INeuronBehaviorService, NeuronBehaviorService>();
-<<<<<<< HEAD
-=======
-builder.Services.AddScoped<INeuronGenerationService, NeuronGenerationService>();
->>>>>>> develop
 builder.Services.AddScoped<INeuronResetService, NeuronResetService>();
 
 var app = builder.Build();
