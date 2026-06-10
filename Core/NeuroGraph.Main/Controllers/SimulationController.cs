@@ -1,3 +1,5 @@
+using Api.Entities;
+using Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Neurograph.Services;
 using Interfaces;

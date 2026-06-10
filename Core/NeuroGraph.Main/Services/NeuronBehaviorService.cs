@@ -18,6 +18,9 @@ public class NeuronBehaviorService : INeuronBehaviorService
         _settings = settings;
     }
 
+    
+
+
     public async Task RunTickAsync()
     {
         var neurons = await _db.Neurons
