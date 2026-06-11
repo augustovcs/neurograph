@@ -44,7 +44,7 @@ public class SimulationController : ControllerBase
     [HttpDelete("delete-all-neurons")]
     public async Task<IActionResult> DeleteAllNeurons()
     {
-        await _resetService.ResetNeurons();
+        await _resetService.ResetAllAsync();
         return Ok(new { message = "Deleted all neurons!"}); 
     }
 

@@ -1,31 +1,19 @@
-using Api.Entities;
+using Interfaces;
 using NeuroGraph.Main.Data;
 using Microsoft.EntityFrameworkCore;
-using Interfaces;
 
 namespace Neurograph.Services;
 
 public class NeuronResetService : INeuronResetService
 {
+    private readonly AppDbContext _db;
 
-    public AppDbContext _dbContext;
-    public NeuronResetService(AppDbContext dbContext)
+    public NeuronResetService(AppDbContext db) => _db = db;
+
+    public async Task ResetAllAsync()
     {
-        _dbContext = dbContext;
-        
+        await _db.NeuralConnections.ExecuteDeleteAsync();
+        await _db.Neurons.ExecuteDeleteAsync();
+        // NeuronLogs são preservados; neuron_id fica NULL pelo SET NULL da FK
     }
-    
-    public async Task<bool> ResetNeurons()
-    {
-
-       var neurons = await _dbContext.Neurons.ToListAsync();
-       _dbContext.Neurons.RemoveRange(neurons);
-       await _dbContext.SaveChangesAsync();
-
-       return true;
-        
-
-
-    }
-
 }

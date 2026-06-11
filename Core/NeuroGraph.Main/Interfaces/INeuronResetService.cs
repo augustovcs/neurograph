@@ -1,6 +1,6 @@
 namespace Interfaces;
 
-public interface INeuronResetService
-{
-    public Task<bool> ResetNeurons ();
-}
+    public interface INeuronResetService
+    {
+        Task ResetAllAsync();
+    }
