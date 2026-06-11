@@ -1,4 +1,4 @@
-namespace Interfaces;
+namespace NeuroGraph.Main.Interfaces;
 
 public interface INeuronGenerationService
 {
