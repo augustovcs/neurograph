@@ -1,6 +1,9 @@
-namespace NeuroGraph.Main.Interfaces;
-
+namespace NeuroGraph.Main.Interfaces
+{
     public interface INeuronResetService
     {
         Task ResetAllAsync();
     }
+}
+
+    

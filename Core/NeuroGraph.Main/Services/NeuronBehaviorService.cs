@@ -1,7 +1,7 @@
 using NeuroGraph.Main.Interfaces;
 using NeuroGraph.Main.Data;
 using Microsoft.EntityFrameworkCore;
-using Api.Entities;
+using NeuroGraph.Main.Entities;
 
 
 namespace NeuroGraph.Main.Services;

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Api.Entities
+namespace NeuroGraph.Main.Entities
 {
 
     [Table("neurons_logs")]

@@ -1,6 +1,9 @@
-namespace NeuroGraph.Main.Interfaces;
-
-public interface INeuronGenerationService
+namespace NeuroGraph.Main.Interfaces
 {
-    public Task<bool> LowNeuronSpawn(int countNeurons);
+    public interface INeuronGenerationService
+    {
+        public Task<bool> LowNeuronSpawn(int countNeurons);
+    }
+
 }
+

@@ -1,9 +1,9 @@
-using Api.Entities;
+using NeuroGraph.Main.Entities;
 using NeuroGraph.Main.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using NeuroGraph.Main.Services;
 
-namespace NeuroGraph.Main.Controllers;
+namespace Controller.Neurograph.main;
 
 
 [ApiController]

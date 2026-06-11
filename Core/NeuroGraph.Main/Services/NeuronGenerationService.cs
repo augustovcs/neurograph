@@ -1,5 +1,5 @@
 using NeuroGraph.Main.Interfaces;
-using Api.Entities;
+using NeuroGraph.Main.Entities;
 using NeuroGraph.Main.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http.HttpResults;

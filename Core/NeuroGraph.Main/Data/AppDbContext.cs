@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Api.Entities;
-using Api.Entities.Views;
+using NeuroGraph.Main.Entities;
+using NeuroGraph.Main.Entities.Views;
 
 namespace NeuroGraph.Main.Data;
 
