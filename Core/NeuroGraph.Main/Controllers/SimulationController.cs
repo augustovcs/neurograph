@@ -3,21 +3,25 @@ using Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Neurograph.Services;
 
-
 namespace Controller.Neurograph.main;
+
 
 [ApiController]
 [Route("[controller]")]
 public class SimulationController : ControllerBase
-{                                                                   //So pra lembrar, DI sempre vem antes dos métodos de ação
+{
+   
     private readonly INeuronBehaviorService _behaviorService;
+    private readonly INeuronGenerationService _generationService;
     private readonly INeuronResetService _resetService;
 
     public SimulationController(
-        INeuronBehaviorService behaviorService,
-        INeuronResetService resetService)
+                    INeuronBehaviorService behaviorService,
+                    INeuronGenerationService generationService, 
+                    INeuronResetService resetService) 
     {
         _behaviorService = behaviorService;
+        _generationService = generationService;
         _resetService = resetService;
     }
 
@@ -28,10 +32,22 @@ public class SimulationController : ControllerBase
         return Ok(new { message = "Tick processado com sucesso" });
     }
 
-    [HttpDelete("reset")]
-    public async Task<IActionResult> Reset()
+    [HttpPost("seed")]
+    public async Task<IActionResult> SeedNeurons([FromQuery] int countNeurons)
     {
-        await _resetService.ResetAllAsync();
-        return Ok(new { message = "Simulação resetada. Logs preservados." });
+
+        await _generationService.LowNeuronSpawn(countNeurons);
+        return Ok(new {message = $"Generated {countNeurons} Neurons with Success! "});
+       
     }
+
+    [HttpDelete("delete-all-neurons")]
+    public async Task<IActionResult> DeleteAllNeurons()
+    {
+        await _resetService.ResetNeurons();
+        return Ok(new { message = "Deleted all neurons!"}); 
+    }
+
+
+
 }
