@@ -75,3 +75,30 @@ export function mapToNeuron(dto: any, index: number): Neuron {
     fireCount: 0,
   };
 }
+// --- Statistics types ---
+export interface LongevityDto {
+  neuronId: string;
+  label: string;
+  lifetimeSeconds: number;
+  evolutionCount: number;
+}
+
+export interface DeathStatsDto {
+  cause: string;
+  deathCount: number;
+}
+
+export interface BestEventDto {
+  eventId: string;
+  neuronId: string;
+  kind: string;
+  cause: string | null;
+  occurredAt: string;
+}
+
+export function formatDuration(seconds: number): string {
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  if (h > 0) return `${h}h ${m}m`;
+  return `${m}m`;
+}
