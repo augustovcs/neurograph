@@ -26,8 +26,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddSingleton(new BehaviorSettings());
 builder.Services.AddScoped<INeuronBehaviorService, NeuronBehaviorService>();
 builder.Services.AddScoped<INeuronResetService, NeuronResetService>();
+builder.Services.AddScoped<INeuronGenerationService, NeuronGenerationService>();
+builder.Services.AddCors(o => o.AddPolicy("web", p =>
+    p.WithOrigins("http://localhost:5173")   // porta do Vite
+     .AllowAnyHeader().AllowAnyMethod()));
 
 var app = builder.Build();
+
+app.UseCors("web");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

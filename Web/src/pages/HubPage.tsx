@@ -1,24 +1,31 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Badge } from "@/components/ui/Badge";
 import { NeuralScene } from "@/features/hub/scene/NeuralScene";
-import { buildNeurons, GROUPS, STATUS_META } from "@/mocks/data";
-import type { NeuronStatus } from "@/lib/types";
-
-const NEURON_COUNT = 26;
+import { GROUPS, STATUS_META } from "@/mocks/data";
+import { getNeurons, getConnections, mapToNeuron } from "@/lib/api";
+import type { Neuron, NeuronStatus } from "@/lib/types";
 
 export function HubPage() {
-  const { groupCounts, statusCounts, total, connections } = useMemo(() => {
-    const neurons = buildNeurons(NEURON_COUNT);
+  const [neurons, setNeurons] = useState<Neuron[]>([]);
+  const [connectionsCount, setConnectionsCount] = useState(0);
+
+  useEffect(() => {
+    getNeurons().then((data) => {
+      setNeurons(data.map((dto: any, i: number) => mapToNeuron(dto, i)));
+    });
+    getConnections().then((data) => setConnectionsCount(data.length));
+  }, []);
+
+  const { groupCounts, statusCounts, total } = useMemo(() => {
     const groupCounts: Record<string, number> = {};
     const statusCounts: Record<NeuronStatus, number> = { idle: 0, firing: 0, evolved: 0, dead: 0 };
     for (const n of neurons) {
       groupCounts[n.group] = (groupCounts[n.group] ?? 0) + 1;
       statusCounts[n.status] += 1;
     }
-    // mesmo nº de arestas geradas em neuralData.ts (8 + 10 + 7 + 3 cruzadas)
-    return { groupCounts, statusCounts, total: neurons.length, connections: 28 };
-  }, []);
+    return { groupCounts, statusCounts, total: neurons.length };
+  }, [neurons]);
 
   return (
     <AppLayout title="Hub — Mundo Neural" badge="HUB">
@@ -31,12 +38,12 @@ export function HubPage() {
               "radial-gradient(120% 120% at 30% 20%, #23252d 0%, #181a20 45%, #101116 100%)",
           }}
         >
-          <NeuralScene count={NEURON_COUNT} />
+          <NeuralScene count={total} />
 
           <div className="pointer-events-none absolute left-4 top-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)]/55 px-3 py-2 backdrop-blur">
             <p className="font-mono text-xs text-muted">
               <span className="text-[var(--color-primary-bright)]">{total}</span> neurônios ·{" "}
-              <span className="text-[var(--color-cyan)]">{connections}</span> conexões
+              <span className="text-[var(--color-cyan)]">{connectionsCount}</span> conexões
             </p>
           </div>
           <div className="pointer-events-none absolute bottom-4 right-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)]/55 px-3 py-1.5 backdrop-blur">
