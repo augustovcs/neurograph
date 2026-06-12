@@ -1,11 +1,11 @@
-using Interfaces;
-using Api.Entities;
+using NeuroGraph.Main.Interfaces;
+using NeuroGraph.Main.Entities;
 using NeuroGraph.Main.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http.HttpResults;
 //using NeuroGraph.Main.Data;
 
-namespace Services;
+namespace NeuroGraph.Main.Services;
 
 public class NeuronGenerationService : INeuronGenerationService
 {

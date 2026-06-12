@@ -1,5 +1,5 @@
-namespace Neurograph.Services
-{
+namespace NeuroGraph.Main.Services;
+
     public class BehaviorSettings
     {
       public double FireChancePerTick { get; set; } = 0.05; // 5% de disparar por tick
@@ -7,4 +7,3 @@ namespace Neurograph.Services
       public double DeathChancePerTick { get; set; } = 0.005; // 0.5% de morrer por tick
       public double EnergyCostPerFire { get; set; } = 1.0; // disparar gasta energia
     }
-}

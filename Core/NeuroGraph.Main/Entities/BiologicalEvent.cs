@@ -1,4 +1,4 @@
-namespace Api.Entities
+namespace NeuroGraph.Main.Entities
 {
     public class BiologicalEvent
     {

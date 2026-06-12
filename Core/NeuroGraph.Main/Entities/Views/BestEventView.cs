@@ -1,4 +1,5 @@
-namespace Api.Entities.Views;
+namespace NeuroGraph.Main.Entities.Views;
+
 
 public class BestEventView
 {

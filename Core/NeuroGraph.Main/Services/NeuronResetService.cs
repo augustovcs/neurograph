@@ -1,8 +1,8 @@
-using Interfaces;
+using NeuroGraph.Main.Interfaces;
 using NeuroGraph.Main.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Neurograph.Services;
+namespace NeuroGraph.Main.Services;
 
 public class NeuronResetService : INeuronResetService
 {

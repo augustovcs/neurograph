@@ -1,9 +1,10 @@
-using Neurograph.Services;
-using Api.Entities;
+using NeuroGraph.Main.Interfaces;
 using NeuroGraph.Main.Data;
 using Microsoft.EntityFrameworkCore;
+using NeuroGraph.Main.Entities;
 
-namespace Neurograph.Services;
+
+namespace NeuroGraph.Main.Services;
 
 
 public class NeuronBehaviorService : INeuronBehaviorService
