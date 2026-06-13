@@ -7,7 +7,6 @@ namespace NeuroGraph.Main.Services;
 public class NeuronResetService : INeuronResetService
 {
     private readonly AppDbContext _db;
-
     public NeuronResetService(AppDbContext db) => _db = db;
 
     public async Task ResetAllAsync()
@@ -15,5 +14,16 @@ public class NeuronResetService : INeuronResetService
         await _db.NeuralConnections.ExecuteDeleteAsync();
         await _db.Neurons.ExecuteDeleteAsync();
         // NeuronLogs são preservados; neuron_id fica NULL pelo SET NULL da FK
+    }
+
+    public async Task ResetNeuronAsync(Guid neuronId)
+    {
+        await _db.NeuralConnections
+            .Where(c => c.SourceNeuronId == neuronId || c.TargetNeuronId == neuronId)
+            .ExecuteDeleteAsync();
+
+        await _db.Neurons
+            .Where(n => n.Id == neuronId)
+            .ExecuteDeleteAsync();
     }
 }
