@@ -106,6 +106,25 @@ Essa separação existe para acomodar as Fases 2–4 (SignalR, Engine, Redis, Ra
 - Frontend usa pnpm (não npm/yarn). Path alias `@/` → `src/`.
 - Manter Fase 1 sem concorrência. Disparos hoje podem ser polling/random; tempo real fica para Fase 2.
 
+### Entity vs DTO (contrato HTTP)
+
+Regra mestra: **Entity/View nunca cruza a fronteira HTTP. Controller só fala DTO.** Entity é o modelo do banco (EF); DTO é o contrato da API. Devolver entidade prende o JSON ao mapeamento do EF e vaza o banco pro front.
+
+| Tipo | Pasta | Papel | Cruza HTTP? |
+|------|-------|-------|-------------|
+| **Entity** | `Entities/` | Tabela mapeada pelo EF (chave, navegações, rastreada/escrita). | ❌ nunca |
+| **View** | `Entities/Views/` | Projeção read-only (`HasNoKey().ToView(...)`). É origem de leitura, não contrato. | ❌ nunca |
+| **DTO** | `Dtos/` | Formato que entra/sai da API. Sem EF, sem navegação. | ✅ sempre |
+
+Na prática:
+- Se um tipo aparece numa assinatura de action (`ActionResult<...>` ou `[FromBody]`), tem que ser DTO.
+- **Request**: DTO de entrada (`CreateXxxDto`/`UpdateXxxDto`). Nunca aceitar entidade no `[FromBody]` (evita over-posting).
+- **Response**: DTO de saída, projetado com `.Select(...)` na própria query (`NeuronDto`, `LongevityDto`). Views também são projetadas pra DTO antes de retornar.
+- Entity/View ficam só dentro de controller/service (queries, persistência, domínio) — nunca saem.
+- Ação sem corpo de retorno usa `MessageDto`, não objeto anônimo.
+
+Naming: saída `XxxDto`; entrada `CreateXxxDto`/`UpdateXxxDto`; agregado de tela `XxxPageDataDto`.
+
 ## Atribuição em commits (IMPORTANTE)
 
 - Ao commitar e dar push em nome do usuário, **NÃO** adicionar nenhuma atribuição de autoria/coautoria ao assistente (Claude). Especificamente: **não** incluir o trailer `Co-Authored-By: Claude ...` nem qualquer outra marca de "Generated with Claude Code" nas mensagens de commit. O objetivo é que o assistente não apareça como contribuidor no GitHub. Os commits devem sair apenas em nome do usuário.
