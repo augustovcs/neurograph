@@ -46,17 +46,6 @@ public class SimulationConfigService : ISimulationConfigService
         return ToDto(config);
     }
 
-    // Copia o DTO para o parâmetro, mantendo o valor dentro de [Min, Max].
-    private static void Apply(ConfigParameter target, ConfigParameterDto value)
-    {
-        target.Min = value.Min;
-        target.Max = value.Max;
-        target.Pinned = value.Pinned;
-        target.Value = value.Min <= value.Max
-            ? Math.Clamp(value.Value, value.Min, value.Max)
-            : value.Value;
-    }
-
     // Linha única de config: pega a existente ou cria com defaults (e persiste).
     private async Task<SimulationConfig> GetOrCreateAsync()
     {
@@ -69,6 +58,20 @@ public class SimulationConfigService : ISimulationConfigService
         }
         return config;
     }
+
+    //  FIXED METHODS
+
+        // Copia o DTO para o parâmetro, mantendo o valor dentro de [Min, Max].
+    private static void Apply(ConfigParameter target, ConfigParameterDto value)
+    {
+        target.Min = value.Min;
+        target.Max = value.Max;
+        target.Pinned = value.Pinned;
+        target.Value = value.Min <= value.Max
+            ? Math.Clamp(value.Value, value.Min, value.Max)
+            : value.Value;
+    }
+
 
     private static SimulationConfig Defaults() => new()
     {
