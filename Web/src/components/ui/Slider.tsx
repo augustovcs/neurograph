@@ -3,16 +3,18 @@ interface SliderProps {
   min: number;
   max: number;
   color: string;
+  step?: number;
   onChange: (value: number) => void;
 }
 
-export function Slider({ value, min, max, color, onChange }: SliderProps) {
-  const pct = ((value - min) / (max - min)) * 100;
+export function Slider({ value, min, max, color, step = 1, onChange }: SliderProps) {
+  const pct = max > min ? ((value - min) / (max - min)) * 100 : 0;
   return (
     <input
       type="range"
       min={min}
       max={max}
+      step={step}
       value={value}
       onChange={(e) => onChange(Number(e.target.value))}
       className="h-1.5 w-full cursor-pointer appearance-none rounded-full outline-none

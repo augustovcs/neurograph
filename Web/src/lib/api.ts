@@ -102,3 +102,37 @@ export function formatDuration(seconds: number): string {
   if (h > 0) return `${h}h ${m}m`;
   return `${m}m`;
 }
+
+// --- Simulation config (Editor) ---
+export interface ConfigParameterDto {
+  value: number;
+  pinned: boolean;
+  min: number;
+  max: number;
+}
+
+export interface SimulationConfigDto {
+  fireChancePerTick: ConfigParameterDto;
+  evolveChancePerTick: ConfigParameterDto;
+  deathChancePerTick: ConfigParameterDto;
+  energyCostPerFire: ConfigParameterDto;
+  energyRegenPerTick: ConfigParameterDto;
+}
+
+export async function getSimulationConfig(): Promise<SimulationConfigDto> {
+  const res = await fetch(`${BASE}/simulation/config`);
+  if (!res.ok) throw new Error("Falha ao buscar configuração");
+  return res.json();
+}
+
+export async function updateSimulationConfig(
+  dto: SimulationConfigDto,
+): Promise<SimulationConfigDto> {
+  const res = await fetch(`${BASE}/simulation/config`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(dto),
+  });
+  if (!res.ok) throw new Error("Falha ao salvar configuração");
+  return res.json();
+}

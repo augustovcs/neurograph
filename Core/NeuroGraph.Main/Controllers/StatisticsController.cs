@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using NeuroGraph.Main.Data;
-using NeuroGraph.Main.Entities.Views;
+using NeuroGraph.Main.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace NeuroGraph.Main.Controllers;
@@ -17,23 +17,29 @@ public class StatisticsController : ControllerBase
     }
 
     [HttpGet("longevity")]
-    public async Task<ActionResult<IEnumerable<NeuronLongevityView>>> GetLongevity()
+    public async Task<ActionResult<IEnumerable<LongevityDto>>> GetLongevity()
     {
-        var data = await _db.NeuronLongevity.ToListAsync();
+        var data = await _db.NeuronLongevity
+            .Select(v => new LongevityDto(v.NeuronId, v.Label, v.LifetimeSeconds, v.EvolutionCount))
+            .ToListAsync();
         return Ok(data);
     }
 
     [HttpGet("deaths")]
-    public async Task<ActionResult<IEnumerable<NeuronDeathStatsView>>> GetDeaths()
+    public async Task<ActionResult<IEnumerable<DeathStatsDto>>> GetDeaths()
     {
-        var data = await _db.NeuronDeathStats.ToListAsync();
+        var data = await _db.NeuronDeathStats
+            .Select(v => new DeathStatsDto(v.Cause, v.DeathCount))
+            .ToListAsync();
         return Ok(data);
     }
 
     [HttpGet("best-events")]
-    public async Task<ActionResult<IEnumerable<BestEventView>>> GetBestEvents()
+    public async Task<ActionResult<IEnumerable<BestEventDto>>> GetBestEvents()
     {
-        var data = await _db.BestEvents.ToListAsync();
+        var data = await _db.BestEvents
+            .Select(v => new BestEventDto(v.EventId, v.NeuronId, v.Kind, v.Cause, v.OccurredAt))
+            .ToListAsync();
         return Ok(data);
     }
 }
