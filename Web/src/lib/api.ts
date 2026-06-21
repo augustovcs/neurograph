@@ -1,6 +1,6 @@
 import type { Neuron, NeuronGroup } from "@/lib/types";
 
-const BASE = import.meta.env.VITE_API_URL;
+const BASE = import.meta.env.VITE_API_URL?? "http://localhost:5000/api";
 
 // --- Neurons ---
 export async function getNeurons() {

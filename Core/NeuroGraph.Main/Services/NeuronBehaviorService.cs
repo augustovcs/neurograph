@@ -11,16 +11,16 @@ public class NeuronBehaviorService : INeuronBehaviorService
 {
     private readonly AppDbContext _db;
     private readonly BehaviorSettings _settings;
-    private static readonly Random _rng = new();
+    private readonly Random _rng;
 
-    public NeuronBehaviorService(AppDbContext db, BehaviorSettings settings)
+    public NeuronBehaviorService(AppDbContext db, BehaviorSettings settings, Random? rng = null)
     {
         _db = db;
         _settings = settings;
+        _rng = rng ?? new Random();
     }
 
     
-
 
     public async Task RunTickAsync()
     {

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F4741C5E-0EF2-43A3-AA7F-59C0D8BDCF7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\NeuroGraph.Main\Core.csproj", "{EC8FB4F4-F93D-457C-9B79-DF45A0FC849A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroGraph.Tests", "Core\NeuroGraph.Tests\NeuroGraph.Tests.csproj", "{6305932B-B6FD-4FA8-8511-E02B9EC33287}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC8FB4F4-F93D-457C-9B79-DF45A0FC849A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC8FB4F4-F93D-457C-9B79-DF45A0FC849A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC8FB4F4-F93D-457C-9B79-DF45A0FC849A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC8FB4F4-F93D-457C-9B79-DF45A0FC849A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6305932B-B6FD-4FA8-8511-E02B9EC33287}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6305932B-B6FD-4FA8-8511-E02B9EC33287}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6305932B-B6FD-4FA8-8511-E02B9EC33287}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6305932B-B6FD-4FA8-8511-E02B9EC33287}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EC8FB4F4-F93D-457C-9B79-DF45A0FC849A} = {F4741C5E-0EF2-43A3-AA7F-59C0D8BDCF7E}
+		{6305932B-B6FD-4FA8-8511-E02B9EC33287} = {F4741C5E-0EF2-43A3-AA7F-59C0D8BDCF7E}
+	EndGlobalSection
+EndGlobal
