@@ -27,11 +27,14 @@ public class SimulationController : ControllerBase
         _configService = configService;
     }
 
+
     [HttpPost("tick")]
     public async Task<IActionResult> RunTick()
-    {
+    {   
+
         await _behaviorService.RunTickAsync();
         return Ok(new MessageDto("Tick processado com sucesso"));
+
     }
 
     [HttpPost("seed")]

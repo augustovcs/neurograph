@@ -74,8 +74,10 @@ public class NeuronBehaviorService : INeuronBehaviorService
                 });
                 _db.NeuronLogs.Add(new NeuronLog { NeuronId = n.Id, Type = "died" });
             }
-        }
 
+            
+        }
+        Console.WriteLine($" [TICK CONFIG] Neurons={neurons.Count} Fire={fireChance:P2} | Evolve={evolveChance:P2} | Death={deathChance:P2} | EnergyCost={energyCost:F2} | EnergyRegen={energyRegen:F2}");
         await _db.SaveChangesAsync();   // grava TUDO de uma vez (uma transação)
     }
 

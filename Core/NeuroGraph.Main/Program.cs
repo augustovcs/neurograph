@@ -4,6 +4,7 @@ using NeuroGraph.Main.Data;
 using EFCore.NamingConventions;
 using NeuroGraph.Main.Interfaces;
 using NeuroGraph.Main.Services;
+using NeuroGraph.Main.Workers;
 
 // Garante ambiente Development quando rodado pelo dotnet ef (que não lê launchSettings).
 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") is null)
@@ -23,6 +24,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     .UseSnakeCaseNamingConvention());
     
     
+
+//WORKERS
+builder.Services.AddHostedService<SimulationWorker>();
+
 builder.Services.AddScoped<INeuronBehaviorService, NeuronBehaviorService>();
 builder.Services.AddScoped<INeuronResetService, NeuronResetService>();
 builder.Services.AddScoped<INeuronGenerationService, NeuronGenerationService>();
